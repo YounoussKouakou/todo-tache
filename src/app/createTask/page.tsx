@@ -1,5 +1,5 @@
 "use client";
-import {  useState } from "react";
+import { useState } from "react";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
 import { addTodo } from "@/Gateways/todo";
@@ -11,8 +11,9 @@ export default function CreateTask() {
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    if (title.trim() == "") {
-      setError("Entrez la tâches");
+    if (title.trim() === "") {
+      setError("Entrez la tâche");
+      return;
     }
 
     addTodo(title);
@@ -20,19 +21,21 @@ export default function CreateTask() {
   };
 
   return (
-    <div className="grid justify-center items-center h-screen mt-10 p-10  bg-white">
+    <div className="flex justify-center items-center min-h-screen p-4 bg-white">
       <form
         onSubmit={handleSubmit}
-        className="h-96 w-2xl p-5 justify-center flex flex-col mx-auto gap-10 bg-slate-300 max-w-lg border-2 border-solid  border-gray-300 rounded-lg shadow-md"
+        className="w-full max-w-md p-6 flex flex-col gap-6 bg-slate-300 border border-gray-300 rounded-lg shadow-md"
       >
-        <div className="w-full flex justify-between ">
+        <div className="flex flex-col sm:flex-row justify-between items-center gap-4">
           <Link
             href="/task"
-            className="border bg-slate-200/80 px-3 flex items-center rounded"
+            className="border bg-slate-200/80 px-4 py-2 rounded text-center"
           >
-            Taches
+            Tâches
           </Link>
-          <h1 className=" text-center text-3xl font-bold">Créer une tâche</h1>
+          <h1 className="text-xl sm:text-2xl font-bold text-center">
+            Créer une tâche
+          </h1>
         </div>
 
         <input
@@ -43,13 +46,14 @@ export default function CreateTask() {
             setTitle(e.target.value);
             if (error) setError("");
           }}
-          className="bg-white p-2 border rounded font-semibold text-lg"
+          className="bg-white p-3 border rounded font-semibold text-base"
           required
         />
+        {error && <p className="text-red-600 text-sm">{error}</p>}
 
         <button
           type="submit"
-          className="cursor-pointer rounded-lg p-3 bg-green-500/20 border-2 border-solid border-green-500/20 transition-colors hover:bg-green-700/40 font-medium text-base leading-none flex flex-row items-center justify-center gap-2"
+          className="cursor-pointer rounded-lg p-3 bg-green-500/20 border-2 border-green-500/20 transition-colors hover:bg-green-700/40 font-medium text-base flex items-center justify-center"
         >
           Ajouter
         </button>

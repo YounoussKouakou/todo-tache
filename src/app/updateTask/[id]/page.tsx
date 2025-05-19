@@ -1,10 +1,11 @@
-"use client";
-import {getTodoById, updateTaskById } from "@/Gateways/todo";
+'use client';
+
+import { getTodoById, updateTaskById } from "@/Gateways/todo";
 import { ITodo } from "@/Interfaces/todo";
 import { useRouter, useParams } from "next/navigation";
 import { useState, useEffect } from "react";
 
-export default function UpdateTask() {
+ function UpdateTask() {
   const { id } = useParams();
   const [task, setTask] = useState<ITodo | null>(null);
   const [title, setTitle] = useState("");
@@ -35,43 +36,46 @@ export default function UpdateTask() {
   };
 
   return (
-    <>
-      <div className="grid justify-center items-center min-h-screen mt-10 ">
-        <form
-          onSubmit={handleUpdate}
-          className="flex flex-col mx-auto  max-w-lg w-3xl border p-10 rounded bg-slate-100/90 gap-7"
-        >
-          <div className="flex justify-between items-center">
-            <h1 className="text-3xl font-bold">Mettre à jour la tâche</h1>
-            <button
-              className="border bg-slate-200/80 px-3 flex items-center rounded font-serif cursor-pointer"
-              onClick={() => router.push("/task")}>Retour
-              </button>
-          </div>
-          <input
-            className="border p-2 w-full rounded bg-white"
-            value={title}
-            onChange={(e) => setTitle(e.target.value)}
-            placeholder="tâche"
-          />
-          <div >
-            <select
-            className="border bg-blue-300/90 rounded p-1 font-serif text-xl"
-              value={completed ? "done" : "pending"}
-              onChange={(e) => setCompleted(e.target.value === "done")}
-            >
-              <option value="done">Terminée</option>
-              <option value="pending">En cours</option>
-            </select>
-          </div>
+    <div className="flex justify-center items-center min-h-screen p-4 sm:p-8 bg-gray-50">
+      <form
+        onSubmit={handleUpdate}
+        className="w-full max-w-md sm:max-w-lg border p-6 sm:p-10 rounded-lg bg-white shadow-md flex flex-col gap-6"
+      >
+        <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-2">
+          <h1 className="text-2xl sm:text-3xl font-bold">Mettre à jour la tâche</h1>
           <button
-            className="rounded-lg p-3 cursor-pointer bg-green-500/20 border-2 border-solid border-green-500/20 transition-colors hover:bg-green-500/40 font-medium text-base leading-none flex flex-row items-center justify-center gap-2"
-            type="submit"
+            type="button"
+            onClick={() => router.push("/task")}
+            className="border bg-slate-200/80 px-4 py-1 rounded font-serif text-sm sm:text-base"
           >
-            Mettre à jour
+            Retour
           </button>
-        </form>
-      </div>
-    </>
+        </div>
+
+        <input
+          className="border p-2 w-full rounded bg-white text-base"
+          value={title}
+          onChange={(e) => setTitle(e.target.value)}
+          placeholder="Tâche"
+        />
+
+        <select
+          className="border bg-blue-100 rounded p-2 text-base"
+          value={completed ? "done" : "pending"}
+          onChange={(e) => setCompleted(e.target.value === "done")}
+        >
+          <option value="done">Terminée</option>
+          <option value="pending">En cours</option>
+        </select>
+
+        <button
+          type="submit"
+          className="bg-green-500 text-white rounded-lg px-4 py-2 text-base font-semibold hover:bg-green-600 transition-colors"
+        >
+          Mettre à jour
+        </button>
+      </form>
+    </div>
   );
 }
+export default UpdateTask;
