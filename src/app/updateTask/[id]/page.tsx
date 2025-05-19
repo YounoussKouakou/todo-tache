@@ -1,5 +1,5 @@
 "use client";
-import { addTodo, getTodoById, updateTaskById } from "@/Gateways/todo";
+import {getTodoById, updateTaskById } from "@/Gateways/todo";
 import { ITodo } from "@/Interfaces/todo";
 import { useRouter, useParams } from "next/navigation";
 import { useState, useEffect } from "react";

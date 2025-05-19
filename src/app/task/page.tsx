@@ -1,18 +1,11 @@
 'use client';
 import { getTodos } from '@/Gateways/todo';
 import { ITodo } from '@/Interfaces/todo';
-import { Span } from 'next/dist/trace';
 import Link from 'next/link';
 import { useState, useEffect } from 'react';
 import { FaRegEdit } from 'react-icons/fa';
 import { MdDelete } from 'react-icons/md';
 
-type Task = {
-  id: number;
-  title: string;
-  description: string;
-  status: string;
-};
 
 export default function TodoTask() {
   const [tasks, setTasks] = useState<ITodo[]>([]);
